@@ -1,12 +1,12 @@
 import scrapy
 
 class BlogSpider(scrapy.Spider):
-    name = 'blogspider'
-    start_urls = ['https://blog.scrapinghub.com']
+    name = 'mercadolibre'
+    start_urls = ['https://www.mercadolibre.com.mx']
 
     def parse(self, response):
-        for title in response.css('.post-header>h2'):
-            yield {'title': title.css('a ::text').get()}
+        for title in response.css('.ui-item__content'):
+            yield {'title': title.css('.ui-item__title ::text').get()}
 
-        for next_page in response.css('a.next-posts-link'):
+        for next_page in response.css('a.andes-pagination__link prefetch'):
             yield response.follow(next_page, self.parse)
