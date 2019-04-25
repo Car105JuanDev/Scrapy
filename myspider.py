@@ -5,6 +5,7 @@ class BlogSpider(scrapy.Spider):
     start_urls = ['https://www.mercadolibre.com.mx']
 
     def parse(self, response):
+        
         for title in response.css('.ui-item__content'):
             yield {'title': title.css('.ui-item__title ::text').get()}
 
