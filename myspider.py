@@ -8,6 +8,5 @@ class BlogSpider(scrapy.Spider):
         
         for title in response.css('.ui-item__content'):
             yield {'title': title.css('.ui-item__title ::text').get()}
-
         for next_page in response.css('a.andes-pagination__link prefetch'):
             yield response.follow(next_page, self.parse)
